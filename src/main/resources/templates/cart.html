@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Cart</title>
+    <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<body style="width: 60%; margin: auto;background-color: aliceblue">
+<div th:replace="template :: header_menu"></div>
+<div style="overflow: hidden;">
+    <div class="task-content" th:each="deal : ${deals}">
+        <div class="product-box col-xs-6 col-md-4" th:style="(${deal.flag} ?'background: #1aff004f':'background:#ff00005e')  + ';text-align: center; width: fit-content;border-radius: 41px;margin: 8px;'">
+            <a th:href="${'/product/' + deal.product.id}">
+                <img th:src="${deal.product.image}" th:height="300px" th:style="'padding: 16px;'">
+            </a>
+            <div class="caption" style="text-align: center">
+                <div class="capt_name"><h2 th:text="${deal.product.name}"></h2></div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+</body>
+</html>

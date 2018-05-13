@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Product</title>
+    <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body style="width: 40%; margin: auto">
+    <form action="/artist/addProduct" th:object="${product}" method="POST" enctype="utf8">
+        Name: <div class="form-control" style="margin-bottom: 5px;"><input th:field="*{name}" class="form-control"/>
+    </div>
+        Image: <div class="form-control" style="margin-bottom: 5px;"><input th:field="*{image}" class="form-control"/>
+    </div>
+        Price: <div class="form-control" style="margin-bottom: 5px;"><input th:field="*{price}" class="form-control"/>
+    </div>
+        Description: <div class="form-control" style="margin-bottom: 5px;"><input th:field="*{description}" class="form-control"/>
+    </div>
+        Category: <div class="form-control" style="margin-bottom: 5px;"><input name="category" class="form-control"/>
+    </div>
+        Genre: <div class="form-control" style="margin-bottom: 5px;"><input name="genre" class="form-control"/>
+    </div>
+        Material: <div class="form-control" style="margin-bottom: 5px;"><input name="material_name" class="form-control"/>
+    </div>
+        Material color: <div class="form-control" style="margin-bottom: 5px;"><input name="material_color" class="form-control"/>
+    </div>
+        <button style="margin-top: 10px;" type="submit" class="btn btn-info">Add</button>
+    </form>
+</body>
+</html>

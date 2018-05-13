@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:textarea="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <title>Title</title>
+</head>
+<body style="width: 20%; margin: 0 auto">
+<span th:text="${error != null} ? ${error} : ''">someValue</span>
+<form action="/signup" th:object="${user}" method="POST" enctype="utf8">
+    As artist? <input id="checkBox" type="checkbox" onclick="change()"><br/>
+        Логин: <div class="form-control" style="margin-bottom: 5px;"><input th:field="*{name}" class="form-control"/>
+    </div>
+        Имя: <div class="form-control" style="margin-bottom: 5px;"><input type="text" th:field="*{firstName}" class="form-control"/>
+    </div>
+        Фамилия: <div class="form-control" style="margin-bottom: 5px;"><input type="text" th:field="*{surname}" class="form-control"/>
+    </div>
+        Пароль: <div class="form-control" style="margin-bottom: 5px;"><input type="password" th:field="*{password}" class="form-control"/>
+    </div>
+        Повторите пароль: <div class="form-control" style="margin-bottom: 5px;"><input type="password" name="matchingPassword" class="form-control"/>
+    </div>
+        Email: <div class="form-control" style="margin-bottom: 5px;"><input type="email" th:field="*{email}" class="form-control"/>
+    </div>
+    <div hidden id="artistDiv">
+            Биография: <div class="form-control" style="margin-bottom: 5px;"><input type="text" name="biography" class="form-control"/>
+        </div>
+    </div>
+    <div id="buyerDiv">
+            Адрес: <div class="form-control" style="margin-bottom: 5px;"><input type="text" name="address" class="form-control"/>
+        </div>
+    </div>
+    <div>
+        <input hidden type="text" name="role" value="0" id="role"/>
+    </div>
+    <button style="margin-top: 10px;" type="submit" class="btn btn-info">Отправить</button>
+</form>
+
+<script>
+
+    var artistDiv = document.getElementById("artistDiv");
+    var buyerDiv = document.getElementById("buyerDiv");
+
+    function change() {
+        var checkbox = document.getElementById('checkBox');
+        var roleValue = document.getElementById("role");
+        if(checkbox.checked){
+            roleValue.value = 1;
+            console.log(roleValue.value);
+            artistDiv.hidden = false;
+            buyerDiv.hidden = true;
+        }else{
+            roleValue.value = 0;
+            console.log(roleValue.value);
+            artistDiv.hidden = true;
+            buyerDiv.hidden = false;
+        }
+    }
+
+</script>
+</body>
+</html>

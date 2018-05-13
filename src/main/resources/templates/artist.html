@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body style="width: 60%; margin: auto;background-color: aliceblue">
+<div th:replace="template :: header_menu"></div>
+    <div class="row row10" style="float: left;">
+        <div class="padding0-10-20 col-xs-6 col-sm-4 col-md-3" style="    margin-right: 26px;">
+            <div class="thumbnail-box" style="text-align: center;
+    width: fit-content;border-radius: 42px;
+    box-shadow: 0 1px 0 0 #d7d8db, 0 0 0 1px #e3e4e8;
+    background: white;">
+                <div class="caption">
+                    <img src="https://versiya.info/uploads/posts/2018-04/1524067531_1524052918_1523980540_27575564_351951085287577_8674413643774820352_n.jpg" style="border-radius: 50%;width: 190px;">
+                    <h2><a class="capt_name" th:text="${artist.firstName + ' ' +artist.surname}" th:href="${'/artist/'+artist.name}"></a></h2>
+                </div>
+                <div class="biography">
+                    <h3>БИОГРАФИЯ:</h3>
+                    <h2 th:text="${artist.artist.biography}"></h2>
+                </div>
+                <div class="phones" th:if="${not #lists.isEmpty(artist.phones)}" style="padding: 18px;">
+                    <h3>Телефон:</h3>
+                    <h2 th:each="phone : ${artist.phones}">
+                        <span th:text="${phone.number}"></span>
+                    </h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="overflow: hidden;">
+        <div class="task-content" th:each="product : ${products}">
+            <div class="product-box col-xs-6 col-md-4" style="text-align: center; width: fit-content;">
+                <a th:href="${'/product/' + product.id}">
+                    <img th:src="${product.image}" th:height="300px">
+                </a>
+                <div class="caption" style="text-align: center">
+                    <div class="capt_name"><h2 th:text="${product.name}"></h2></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

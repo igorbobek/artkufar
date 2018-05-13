@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Product</title>
+    <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body style="width: 60%; margin: auto;background-color: aliceblue">
+<div th:replace="template :: header_menu"></div>
+<div class="row row10" style="float: left;">
+    <div class="padding0-10-20 col-xs-6 col-sm-4 col-md-3">
+        <div class="thumbnail-box">
+            <div class="caption" style="text-align: center;">
+                <h1><span>АВТОР</span><br/><a class="capt_name" th:text="${product.artist.user.name}" th:href="${'/artist/'+product.artist.user.name}"></a></h1>
+            </div>
+        </div>
+    </div>
+</div>
+<div style="overflow: hidden;">
+    <div class="task-content">
+        <div class="product-box col-xs-6 col-md-4" style="display: flex">
+            <a th:href="${'/product/' + product.id}">
+                <img th:src="${product.image}" th:width="600px">
+            </a>
+            <div class="caption" style="text-align: center; margin-left: 64px">
+                <div class="col-xs-12 col-md-12 art-detail-description " style="    background-color: #fff;
+    height: 100%;
+    font-size: 15px;
+    margin-bottom: 20px;
+    padding: 20px;
+    border-radius: 4px;
+    box-shadow: 0 1px 0 0 #d7d8db, 0 0 0 1px #e3e4e8;">
+                    <h1 class="title" itemprop="name" th:text="${product.name}"></h1>
+                    <div>
+                        <span class="param">Цена:</span> <span th:text="${product.price}"></span>
+                    </div>
+                    <div>
+                        <span class="param">Жанр:</span> <span  th:each="genre : ${product.productGenreCategoryS}"><span th:text="${genre.genre.genre}"></span></span></div>
+                    <div>
+                        <span class="param">Материалы:</span> <span  th:each="material : ${product.materials}"><span th:text="${material.name}"></span></span></div>
+            </div>
+            </div>
+            <div sec:authorize="hasRole('ROLE_BUYER')" style="margin-left: 32px">
+                <form th:action="@{/addToCart}" th:method="POST">
+                    <input hidden type="text" name="productId" th:value="${product.id}"/>
+                    <button class="btn btn-info" type="submit">Добавить в корзину</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div>
+    <span class="param">Описание:</span> <span style="font-family: 'Times New Roman', Times, serif;" th:text="${product.description}"></span></div>
+</body>
+</html>

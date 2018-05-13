@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Deals</title>
+    <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<table class="table table-dark">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Artist ID</th>
+        <th scope="col">Buyer ID</th>
+        <th scope="col">Product ID</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="deal : ${deals}">
+        <th scope="row" th:text="${deal.id}"></th>
+        <td><a th:text="${deal.product.artist == null} ? 'NULL' : ${deal.product.artist.id}" th:href="${deal.product.artist == null} ? '/' : ${'/artist/'+deal.product.artist.user.name}"></a></td>
+        <td th:text="${deal.buyer.id}"></td>
+        <td><a  th:text="${deal.product.id}" th:href="${'/product/'+ deal.product.id}"></a></td>
+    </tr>
+
+    </tbody>
+</table>
+</body>
+</html>

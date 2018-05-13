@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Account</title>
+</head>
+<body style="width: 50%; margin: auto">
+
+<div class="container">
+    <h1 th:text="${'HELLO ' + user.name}"></h1>
+    <form th:method="POST" th:action="@{/account/change}" th:object="${user}">
+        Имя: <div class="form-control" style="margin-bottom: 5px;"><input type="text" th:field="*{firstName}" th:value="*{firstName}" class="form-control"/>
+    </div>
+        Фамилия: <div class="form-control" style="margin-bottom: 5px;"><input type="text" th:field="*{surname}" th:value="*{surname}"  class="form-control"/>
+    </div>
+        Email: <div class="form-control" style="margin-bottom: 5px;"><input type="email" th:field="*{email}"  th:value="*{email}" class="form-control"/>
+    </div>
+        <div sec:authorize="hasRole('ROLE_BUYER')">
+        Адрес: <div  class="form-control" style="margin-bottom: 5px;"><input type="text" th:field="*{buyer.address}" th:value="*{buyer.address}"/>
+    </div></div>
+        <div sec:authorize="hasRole('ROLE_ARTIST')">Биография: <div  class="form-control" style="margin-bottom: 5px;"><input type="text" th:field="*{artist.biography}" th:value="*{artist.biography}"/>
+    </div></div>
+        <button  style="margin-right: 13px;" onclick="location.href = '/account/change' " class="btn btn-info" type="submit">Изменить</button>
+    </form>
+</div>
+
+</body>
+</html>

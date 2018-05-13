@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"    xmlns:sec="http://www.w3.org/1999/xhtml" >
+<head>
+    <meta charset="UTF-8">
+    <title>Gallery</title>
+    <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+    <div th:replace="template :: header_menu"></div>
+    <div class="task-content">
+        <div th:each="product : ${products}" class="product-box col-xs-6 col-md-4" style="text-align: center; margin-top: 10px;     width: fit-content;">
+            <div style="background-color: #00000024; padding: 10px; border-radius: 16px;">
+            <a th:href="${'/product/' + product.id}">
+                <img th:src="${product.image}" th:width="330px">
+            </a>
+            <h1><a th:text="${product.artist.user.name}" th:href="${'/artist/'+ product.artist.user.name}"></a>
+                <div sec:authorize="hasRole('ROLE_ADMIN')" style="display: contents;">
+                    <form th:method="POST" th:action="@{/deleteProduct}" style="float: right;">
+                        <input th:value="${product.id}" type="hidden" name="productId">
+                        <button type="submit" style="background: url(http://s1.iconbird.com/ico/0612/GooglePlusInterfaceIcons/w128h1281338911586cross.png);    height: 31px;
+    background-repeat: no-repeat;
+    background-size: 27px 27px;
+    width: 31px;"></button>
+                    </form>
+                </div>
+            </h1>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
